@@ -9,16 +9,26 @@ class AuthController extends _$AuthController {
   FutureOr<void> build() {}
 
   Future<void> login(String email, String password) async {
+    final authRepo = ref.read(authRepositoryProvider);
+
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-      () => ref.read(authRepositoryProvider).signIn(email, password),
-    );
+
+    try {
+      await authRepo.signIn(email, password);
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
   }
 
   Future<void> register(String email, String password) async {
+    final authRepo = ref.read(authRepositoryProvider);
+
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-      () => ref.read(authRepositoryProvider).register(email, password),
-    );
+
+    try {
+      await authRepo.register(email, password);
+    } catch (e, st) {
+      state = AsyncError(e, st);
+    }
   }
 }
