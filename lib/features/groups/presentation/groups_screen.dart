@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../auth/data/auth_repository.dart';
 import 'groups_controller.dart';
 import 'create_group_sheet.dart';
@@ -37,8 +38,7 @@ class GroupsScreen extends ConsumerWidget {
                 title: Text(group.name),
                 subtitle: Text('${group.memberIds.length} leden'),
                 onTap: () {
-                  // TODO: Navigeer naar detail / quotes pagina
-                  // context.push('/groups/${group.id}');
+                  context.push('/group/${group.id}');
                 },
               );
             },
