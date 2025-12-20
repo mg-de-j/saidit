@@ -16,6 +16,14 @@ _Quote _$QuoteFromJson(Map<String, dynamic> json) => _Quote(
     json['createdAt'] as Timestamp,
   ),
   likes: (json['likes'] as num?)?.toInt() ?? 0,
+  likedBy:
+      (json['likedBy'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const [],
+  dislikedBy:
+      (json['dislikedBy'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      const [],
 );
 
 Map<String, dynamic> _$QuoteToJson(_Quote instance) => <String, dynamic>{
@@ -26,4 +34,6 @@ Map<String, dynamic> _$QuoteToJson(_Quote instance) => <String, dynamic>{
   'groupId': instance.groupId,
   'createdAt': const TimestampConverter().toJson(instance.createdAt),
   'likes': instance.likes,
+  'likedBy': instance.likedBy,
+  'dislikedBy': instance.dislikedBy,
 };

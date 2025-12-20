@@ -15,9 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Quote {
 
- String get id; String get text; String get saidBy;// Naam van wie het zei
- String get addedByUserId;// Wie heeft het gepost
- String get groupId;@TimestampConverter() DateTime get createdAt; int get likes;
+ String get id; String get text; String get saidBy; String get addedByUserId; String get groupId;@TimestampConverter() DateTime get createdAt; int get likes; List<String> get likedBy; List<String> get dislikedBy;
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,16 +28,16 @@ $QuoteCopyWith<Quote> get copyWith => _$QuoteCopyWithImpl<Quote>(this as Quote, 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Quote&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.saidBy, saidBy) || other.saidBy == saidBy)&&(identical(other.addedByUserId, addedByUserId) || other.addedByUserId == addedByUserId)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Quote&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.saidBy, saidBy) || other.saidBy == saidBy)&&(identical(other.addedByUserId, addedByUserId) || other.addedByUserId == addedByUserId)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes)&&const DeepCollectionEquality().equals(other.likedBy, likedBy)&&const DeepCollectionEquality().equals(other.dislikedBy, dislikedBy));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,text,saidBy,addedByUserId,groupId,createdAt,likes);
+int get hashCode => Object.hash(runtimeType,id,text,saidBy,addedByUserId,groupId,createdAt,likes,const DeepCollectionEquality().hash(likedBy),const DeepCollectionEquality().hash(dislikedBy));
 
 @override
 String toString() {
-  return 'Quote(id: $id, text: $text, saidBy: $saidBy, addedByUserId: $addedByUserId, groupId: $groupId, createdAt: $createdAt, likes: $likes)';
+  return 'Quote(id: $id, text: $text, saidBy: $saidBy, addedByUserId: $addedByUserId, groupId: $groupId, createdAt: $createdAt, likes: $likes, likedBy: $likedBy, dislikedBy: $dislikedBy)';
 }
 
 
@@ -50,7 +48,7 @@ abstract mixin class $QuoteCopyWith<$Res>  {
   factory $QuoteCopyWith(Quote value, $Res Function(Quote) _then) = _$QuoteCopyWithImpl;
 @useResult
 $Res call({
- String id, String text, String saidBy, String addedByUserId, String groupId,@TimestampConverter() DateTime createdAt, int likes
+ String id, String text, String saidBy, String addedByUserId, String groupId,@TimestampConverter() DateTime createdAt, int likes, List<String> likedBy, List<String> dislikedBy
 });
 
 
@@ -67,7 +65,7 @@ class _$QuoteCopyWithImpl<$Res>
 
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? saidBy = null,Object? addedByUserId = null,Object? groupId = null,Object? createdAt = null,Object? likes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? text = null,Object? saidBy = null,Object? addedByUserId = null,Object? groupId = null,Object? createdAt = null,Object? likes = null,Object? likedBy = null,Object? dislikedBy = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
@@ -76,7 +74,9 @@ as String,addedByUserId: null == addedByUserId ? _self.addedByUserId : addedByUs
 as String,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,likes: null == likes ? _self.likes : likes // ignore: cast_nullable_to_non_nullable
-as int,
+as int,likedBy: null == likedBy ? _self.likedBy : likedBy // ignore: cast_nullable_to_non_nullable
+as List<String>,dislikedBy: null == dislikedBy ? _self.dislikedBy : dislikedBy // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 
@@ -161,10 +161,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  String saidBy,  String addedByUserId,  String groupId, @TimestampConverter()  DateTime createdAt,  int likes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String text,  String saidBy,  String addedByUserId,  String groupId, @TimestampConverter()  DateTime createdAt,  int likes,  List<String> likedBy,  List<String> dislikedBy)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Quote() when $default != null:
-return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.groupId,_that.createdAt,_that.likes);case _:
+return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.groupId,_that.createdAt,_that.likes,_that.likedBy,_that.dislikedBy);case _:
   return orElse();
 
 }
@@ -182,10 +182,10 @@ return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.group
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  String saidBy,  String addedByUserId,  String groupId, @TimestampConverter()  DateTime createdAt,  int likes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String text,  String saidBy,  String addedByUserId,  String groupId, @TimestampConverter()  DateTime createdAt,  int likes,  List<String> likedBy,  List<String> dislikedBy)  $default,) {final _that = this;
 switch (_that) {
 case _Quote():
-return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.groupId,_that.createdAt,_that.likes);case _:
+return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.groupId,_that.createdAt,_that.likes,_that.likedBy,_that.dislikedBy);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +202,10 @@ return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.group
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  String saidBy,  String addedByUserId,  String groupId, @TimestampConverter()  DateTime createdAt,  int likes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String text,  String saidBy,  String addedByUserId,  String groupId, @TimestampConverter()  DateTime createdAt,  int likes,  List<String> likedBy,  List<String> dislikedBy)?  $default,) {final _that = this;
 switch (_that) {
 case _Quote() when $default != null:
-return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.groupId,_that.createdAt,_that.likes);case _:
+return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.groupId,_that.createdAt,_that.likes,_that.likedBy,_that.dislikedBy);case _:
   return null;
 
 }
@@ -217,18 +217,30 @@ return $default(_that.id,_that.text,_that.saidBy,_that.addedByUserId,_that.group
 @JsonSerializable()
 
 class _Quote extends Quote {
-  const _Quote({required this.id, required this.text, required this.saidBy, required this.addedByUserId, required this.groupId, @TimestampConverter() required this.createdAt, this.likes = 0}): super._();
+  const _Quote({required this.id, required this.text, required this.saidBy, required this.addedByUserId, required this.groupId, @TimestampConverter() required this.createdAt, this.likes = 0, final  List<String> likedBy = const [], final  List<String> dislikedBy = const []}): _likedBy = likedBy,_dislikedBy = dislikedBy,super._();
   factory _Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);
 
 @override final  String id;
 @override final  String text;
 @override final  String saidBy;
-// Naam van wie het zei
 @override final  String addedByUserId;
-// Wie heeft het gepost
 @override final  String groupId;
 @override@TimestampConverter() final  DateTime createdAt;
 @override@JsonKey() final  int likes;
+ final  List<String> _likedBy;
+@override@JsonKey() List<String> get likedBy {
+  if (_likedBy is EqualUnmodifiableListView) return _likedBy;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_likedBy);
+}
+
+ final  List<String> _dislikedBy;
+@override@JsonKey() List<String> get dislikedBy {
+  if (_dislikedBy is EqualUnmodifiableListView) return _dislikedBy;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_dislikedBy);
+}
+
 
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +255,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Quote&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.saidBy, saidBy) || other.saidBy == saidBy)&&(identical(other.addedByUserId, addedByUserId) || other.addedByUserId == addedByUserId)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Quote&&(identical(other.id, id) || other.id == id)&&(identical(other.text, text) || other.text == text)&&(identical(other.saidBy, saidBy) || other.saidBy == saidBy)&&(identical(other.addedByUserId, addedByUserId) || other.addedByUserId == addedByUserId)&&(identical(other.groupId, groupId) || other.groupId == groupId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.likes, likes) || other.likes == likes)&&const DeepCollectionEquality().equals(other._likedBy, _likedBy)&&const DeepCollectionEquality().equals(other._dislikedBy, _dislikedBy));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,text,saidBy,addedByUserId,groupId,createdAt,likes);
+int get hashCode => Object.hash(runtimeType,id,text,saidBy,addedByUserId,groupId,createdAt,likes,const DeepCollectionEquality().hash(_likedBy),const DeepCollectionEquality().hash(_dislikedBy));
 
 @override
 String toString() {
-  return 'Quote(id: $id, text: $text, saidBy: $saidBy, addedByUserId: $addedByUserId, groupId: $groupId, createdAt: $createdAt, likes: $likes)';
+  return 'Quote(id: $id, text: $text, saidBy: $saidBy, addedByUserId: $addedByUserId, groupId: $groupId, createdAt: $createdAt, likes: $likes, likedBy: $likedBy, dislikedBy: $dislikedBy)';
 }
 
 
@@ -263,7 +275,7 @@ abstract mixin class _$QuoteCopyWith<$Res> implements $QuoteCopyWith<$Res> {
   factory _$QuoteCopyWith(_Quote value, $Res Function(_Quote) _then) = __$QuoteCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String text, String saidBy, String addedByUserId, String groupId,@TimestampConverter() DateTime createdAt, int likes
+ String id, String text, String saidBy, String addedByUserId, String groupId,@TimestampConverter() DateTime createdAt, int likes, List<String> likedBy, List<String> dislikedBy
 });
 
 
@@ -280,7 +292,7 @@ class __$QuoteCopyWithImpl<$Res>
 
 /// Create a copy of Quote
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? saidBy = null,Object? addedByUserId = null,Object? groupId = null,Object? createdAt = null,Object? likes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? text = null,Object? saidBy = null,Object? addedByUserId = null,Object? groupId = null,Object? createdAt = null,Object? likes = null,Object? likedBy = null,Object? dislikedBy = null,}) {
   return _then(_Quote(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,text: null == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
@@ -289,7 +301,9 @@ as String,addedByUserId: null == addedByUserId ? _self.addedByUserId : addedByUs
 as String,groupId: null == groupId ? _self.groupId : groupId // ignore: cast_nullable_to_non_nullable
 as String,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as DateTime,likes: null == likes ? _self.likes : likes // ignore: cast_nullable_to_non_nullable
-as int,
+as int,likedBy: null == likedBy ? _self._likedBy : likedBy // ignore: cast_nullable_to_non_nullable
+as List<String>,dislikedBy: null == dislikedBy ? _self._dislikedBy : dislikedBy // ignore: cast_nullable_to_non_nullable
+as List<String>,
   ));
 }
 

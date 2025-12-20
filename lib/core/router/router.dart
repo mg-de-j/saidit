@@ -7,6 +7,7 @@ import '../../features/auth/data/auth_repository.dart';
 import '../../features/auth/presentation/login_screen.dart';
 import '../../features/groups/presentation/groups_screen.dart';
 import '../../features/quotes/presentation/group_detail_screen.dart';
+import '../../features/quotes/presentation/quote_list_screen.dart';
 
 part 'router.g.dart';
 
@@ -56,6 +57,15 @@ GoRouter goRouter(Ref ref) {
               final groupId = state.pathParameters['id']!;
               return GroupDetailScreen(groupId: groupId);
             },
+            routes: [
+              GoRoute(
+                path: 'list',
+                builder: (context, state) {
+                  final groupId = state.pathParameters['id']!;
+                  return QuoteListScreen(groupId: groupId);
+                },
+              ),
+            ],
           ),
         ],
       ),

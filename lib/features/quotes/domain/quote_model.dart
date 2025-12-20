@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../groups/domain/group_model.dart'; // Voor TimestampConverter
+import '../../groups/domain/group_model.dart';
 
 part 'quote_model.freezed.dart';
 part 'quote_model.g.dart';
@@ -12,11 +12,13 @@ class Quote with _$Quote {
   const factory Quote({
     required String id,
     required String text,
-    required String saidBy, // Naam van wie het zei
-    required String addedByUserId, // Wie heeft het gepost
+    required String saidBy,
+    required String addedByUserId,
     required String groupId,
     @TimestampConverter() required DateTime createdAt,
     @Default(0) int likes,
+    @Default([]) List<String> likedBy,
+    @Default([]) List<String> dislikedBy,
   }) = _Quote;
 
   factory Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);
@@ -54,4 +56,12 @@ class Quote with _$Quote {
     // TODO: implement toJson
     throw UnimplementedError();
   }
+
+  @override
+  // TODO: implement likedBy
+  List<String> get likedBy => throw UnimplementedError();
+
+  @override
+  // TODO: implement dislikedBy
+  List<String> get dislikedBy => throw UnimplementedError();
 }
